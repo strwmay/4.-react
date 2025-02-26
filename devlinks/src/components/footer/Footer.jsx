@@ -1,10 +1,10 @@
 import "./Footer.module.css";
 
-const Footer = () => {
+const Footer = ({children}) => {
   return (
     <footer>
         <p>
-            feito com 🤍 por <a href="https://github.com">@strwmay</a>
+            made with ❤‬ by <a href="https://github.com">{children}.</a>
         </p>
     </footer>
   )

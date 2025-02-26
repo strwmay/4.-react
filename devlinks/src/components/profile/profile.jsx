@@ -1,10 +1,10 @@
 import styles from "./profile.module.css";
 
-const Profile = () => {
+const Profile = ({children, profilepic}) => {
   return (
     <div id={styles.profile}> 
-      <img src="https://placehold.co/200x200" alt="" />
-      <p>My Profile</p>
+      <img src={profilepic} alt="" />
+      <p>{children}</p>
     </div>
   );
 };
