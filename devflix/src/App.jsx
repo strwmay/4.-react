@@ -1,96 +1,49 @@
+import { useEffect, useState } from "react";
 import "./App.css";
 import Footer from "./components/footer/Footer";
 import MovieCard from "./components/movieCard/MovieCard";
 // import Logo from ""
 
 const App = () => {
-  const movies = [
-    {
-      Year: "2014",
-      Type: "Sci-Fi",
-      Title: "Interstellar",
-      rating: 8.6,
-      Poster: "https://placehold.co/850x480",
-    },
-    {
-      Year: "2010",
-      Type: "Action",
-      Title: "Inception",
-      boxOffice: "$836.8M",
-      rating: 8.8,
-      Poster: "https://placehold.co/850x480",
-    },
-    {
-      Year: "2010",
-      Type: "Action",
-      Title: "The Expendables",
-      rating: 6.5,
-      Poster: "https://placehold.co/850x480",
-    },
-    {
-      Year: "2010",
-      Type: "Action",
-      Title: "Iron Man 2",
-      rating: 7.0,
-      Poster: "https://placehold.co/850x480",
-    },
-    {
-      Year: "2010",
-      Type: "Action",
-      Title: "Robin Hood",
-      rating: 6.7,
-      Poster: "https://placehold.co/850x480",
-    },
-    {
-      Year: "2010",
-      Type: "Action",
-      Title: "Shutter Island",
-      rating: 8.2,
-      Poster: "https://placehold.co/850x480",
-    },
-    {
-      Year: "2010",
-      Type: "Action",
-      Title: "Kick-Ass",
-      rating: 7.6,
-      Poster: "https://placehold.co/850x480",
-    },
-    {
-      Year: "2010",
-      Type: "Action",
-      Title: "Predators",
-      rating: 6.4,
-      Poster: "https://placehold.co/850x480",
-    },
-    {
-      Year: "2010",
-      Type: "Action",
-      Title: "The A-Team",
-      rating: 6.6,
-      Poster: "https://placehold.co/850x480",
-    },
-    {
-      Year: "2010",
-      Type: "Action",
-      Title: "Clash of the Titans",
-      rating: 5.8,
-      Poster: "https://placehold.co/850x480",
-    },
-    {
-      Year: "2010",
-      Type: "Action",
-      Title: "Salt",
-      rating: 6.5,
-      Poster: "https://placehold.co/850x480",
-    },
-  ];
+
+  const [search,setSearch] = useState("");
+  const [movies,setMovies] = useState([]);
+
+  // utilizando chave de API do arquivo .env
+  const apiKey = import.meta.env.VITE_OMDB_API_KEY;
+  const apiUrl = `http://www.omdbapi.com/?apikey=${apiKey}`;
+
+  // alimentando com dados para não ficar nulo com o useEffect
+  useEffect(() => {
+    searchMovies("batman");
+  }, []);
+
+  // criando a conexão com a API e trazendo informações
+  const searchMovies = async (title) => {
+    const response = await fetch(`${apiUrl}&s=${title}`);
+    const data = await response.json();
+
+    // alimentando o movies
+    setMovies(data.Search);
+  }
+
+  const handleKeyPress = (e) => { // e = evento | ao clicar ou digitar acontece algo
+    e.key === "Enter" && searchMovies(search);
+  }
+
   return (
     <div id="app">
       <img className="logo" src={"https://placehold.co/200x200"} alt="logo" />
 
       <div className="search">
-        <input type="text" placeholder="Pesquise por filmes..." />
-        <img src={"https://placehold.co/20x20"} alt="Pesquisar" />
+        <input 
+        onKeyDown={handleKeyPress}
+        onChange={(e) => setSearch(e.target.value)}
+        type="text" placeholder="Pesquise por filmes..." />
+
+        <img 
+        onClick={() => searchMovies(search)}
+        src={"https://placehold.co/20x20"} alt="Pesquisar" />
       </div>
 
     {movies.map((movie,index)=> (
