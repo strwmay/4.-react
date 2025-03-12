@@ -1,4 +1,4 @@
-import styles from "./Footer.module.css";
+import "./Footer.module.css";
 
 const Footer = (props) => {
   return (
@@ -8,4 +8,4 @@ const Footer = (props) => {
   )
 }
 
-export default Footer
+export default Footer;
