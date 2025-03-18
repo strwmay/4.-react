@@ -8,9 +8,14 @@ const MovieCard = (props) => {
         <p>{props.Year}</p>
       </div>
 
+      <div>
       <img src={props.Poster} alt="" />
+      </div>
+      
+      <div>
       <span>{props.Type}</span>
       <h3>{props.Title}</h3>
+      </div>
     </div>
   );
 };
