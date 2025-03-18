@@ -1,25 +1,33 @@
+import { useState } from "react";
 import MovieDescription from "../movieDescription/MovieDescription";
 import styles from "./MovieCard.module.css";
 
-const MovieCard = ({ apiUrl, ...props }) => {
-// props: propriedades ou argumentos que são passados para um componente
+const MovieCard = (props) => {
+  // props: propriedades ou argumentos que são passados para um componente
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const toggleModal = () => setIsModalOpen(!isModalOpen);
   return (
     <>
-    <div className={styles.movie} >
-      <div>
-        <p>{props.Year}</p>
-      </div>
+      <div className={styles.movie} onClick={toggleModal}>
+        <div>
+          <p>{props.Year}</p>
+        </div>
 
-      <div>
-      <img src={props.Poster} alt="" />
-      </div>
+        <div>
+          <img src={props.Poster} alt="" />
+        </div>
 
-      <div>
-      <span>{props.Type}</span>
-      <h3>{props.Title}</h3>
+        <div>
+          <span>{props.Type}</span>
+          <h3>{props.Title}</h3>
+        </div>
       </div>
-    </div>
-    <MovieDescription apiUrl={apiUrl} movieID={props.imdbID}/>
+      {isModalOpen && (
+        <MovieDescription 
+        apiUrl={props.apiUrl} 
+        movieID={props.imdbID}
+        click={toggleModal} />
+      )}
     </>
   );
 };
