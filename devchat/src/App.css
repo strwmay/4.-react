@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@700&family=Space+Grotesk:wght@400&display=swap');
+
+body {
+  font-family: 'Space Grotesk', sans-serif;
+  background: #000;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+body.light-mode {
+  background: #fff;
+  color: #000;
+}
+
+body.dark-mode {
+  background: #000;
+  color: #fff;
+}
+
+#App {
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+.chat {
+  width: 500px;
+  max-width: 500px;
+  height: 700px;
+  overflow: hidden;
+  background: #000;
+  border: 2px solid #fff;
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+}
