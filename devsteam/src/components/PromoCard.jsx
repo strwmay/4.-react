@@ -30,7 +30,11 @@ const PromoCard = (props) => {
         <button
           id="addCarrinho"
           className="btn btn-success desconto text-light w-100 border-0"
-          onClick={props.onAddCarrinho} //chama a função de adicionar ao carrinho
+          
+          //adicionando a ação de click para +1 item de jogo no carrinho
+          
+          //não se faz necessário adicionar uma função de callback ou um item interno na função, exemplo onAddCarrinho(jogo);
+          onClick={props.onAddCarrinho}
         >
           <i className="bi bi-cart-plus me-2"></i>
           Adicionar ao carrinho
