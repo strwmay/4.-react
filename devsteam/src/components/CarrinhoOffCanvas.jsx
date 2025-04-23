@@ -1,10 +1,16 @@
 import React from "react";
 
 const CarrinhoOffCanvas = (props) => {
+  const total = props.carrinhoItem.reduce(
+    (acc, item) => 
+      acc + (item.preco - (item.preco * item.desconto) / 100) * item.quantidade,
+    0
+  );
+
   return (
     <div
       id="carrinhoOffCanvas"
-      className="offcanvas offcanvas-end show"
+      className="offcanvas offcanvas-end"
       style={{ background: "#364A63" }}
     >
       <div
@@ -56,11 +62,19 @@ const CarrinhoOffCanvas = (props) => {
                         <button
                           className="btn border-0"
                           disabled={item.quantidade === 1}
+                          onClick={()=> 
+                            props.onUpdateCarrinho(item, item.quantidade - 1)
+                          }
                         >
                           -
                         </button>
                         <span>{item.quantidade}</span>
-                        <button className="btn border-0">+</button>
+                        <button 
+                        className="btn border-0"
+                        onClick={()=> 
+                          props.onUpdateCarrinho(item, item.quantidade + 1)
+                        }
+                        >+</button>
                       </div>
 
                       <div className="d-flex flex-column align-items-end">
@@ -81,6 +95,13 @@ const CarrinhoOffCanvas = (props) => {
                 </li>
               ))}
             </ul>
+
+            <hr className="text-white"/>
+            <div className="d-flex justify-content-between text-light fs-4 ">
+              <strong>Total:</strong>
+              <strong>R$ {total.toFixed(2)}</strong>
+            </div>
+            <button className="btn desconto w-100 mt-2 fs-5 ">Finalizar compra</button>
           </>
         )}
       </div>
